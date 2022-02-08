@@ -6,6 +6,8 @@ Well, ask no more! This github action has the answer! :sunglasses:
 
 Keeping your parent image up-to-date is essential to provide your built images with the latest (security) patches. However, you might not want to stupidly rebuild your image everyday. Use this action to check if you really have to rebuild! :partying_face:
 
+Works with any container registry supported by [`containers/skopeo`](https://github.com/containers/skopeo). The default container registry is Docker Hub. If your image is hosted there, you can use `nginx` instead of `docker.io/nginx`. If your image is hosted on GitHub, use e.g. `ghcr.io/oracle/oraclelinux8-python:3.9`.
+
 I haven't tested this with [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/), but I guess it should be able to (only) check the last stage that really makes it into your built image. Feel free to open a pull request.
 
 ## Inputs
