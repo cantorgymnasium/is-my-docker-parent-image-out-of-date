@@ -10,4 +10,4 @@ PARENT=$(skopeo inspect docker://"$2" | jq .Layers)
 OUTOFDATE=$(jq -cn "$OWN - ($OWN - $PARENT) | .==[]")
 
 # Return the result.
-echo "::set-output name=time::$OUTOFDATE"
+echo "::set-output name=out-of-date::$OUTOFDATE"
