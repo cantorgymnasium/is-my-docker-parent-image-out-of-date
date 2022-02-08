@@ -1,27 +1,29 @@
-name: "Docker Image Update Checker"
-description: "GitHub Action to check if the base Docker image that your image is based on was updated and your image needs to be updated"
-author: Luca Comellini <lucacome>
+name: "Is my docker parent image out-of-date?"
+
+description: "Checks if your image uses an out-of-date parent image. Use this do determine whether you need to rebuild your image."
+
+author: twiddler
 
 inputs:
-  base-image:
-    description: "Docker base image"
+  parent-image:
+    description: "The docker parent image you are building on top"
     required: true
-  image:
-    description: "Docker image"
+
+  my-image:
+    description: "Your image"
     required: true
+
 outputs:
-  needs-updating:
-    description: "True or false"
-    value: ${{ steps.run-script.outputs.result }}
+  out-of-date:
+    description: "'true' if your image does NOT use an up-to-date parent image, 'false' otherwise."
+
 runs:
-  using: "composite"
-  steps:
-    - id: run-script
-      run: |
-        result=$(base=${{ inputs.base-image }} image=${{ inputs.image }} ${{ github.action_path }}/docker.sh)
-        echo "::set-output name=result::${result}"
-      shell: bash
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.my-image }}
+    - ${{ inputs.base-image }})
 
 branding:
-  icon: anchor
-  color: blue
+  icon: refresh-ccw
+  color: green

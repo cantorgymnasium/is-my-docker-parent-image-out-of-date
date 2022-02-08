@@ -4,20 +4,27 @@ on: [push]
 
 jobs:
   test:
-    name: Test-Action
-    runs-on: ubuntu-20.04
-    continue-on-error: true
+    name: Let's see if this works
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Test Action
-        id: test
+      - uses: actions/checkout@v2
+
+      - id: check
         uses: ./
         with:
-          base-image: library/nginx:1.21.0
-          image: nginx/nginx-ingress:1.12.0
-      - name: Get Test Output
-        run: echo "Workflow Docker Image ${{ steps.test.outputs.needs-updating }}"
-      - name: Check value
-        run: echo "Needs updating"
-        if: steps.test.outputs.needs-updating == 'true'
+          parent-image: library/nginx:1.21.0
+          my-image: nginx/nginx-ingress:1.12.0
+
+      - run: echo "My image does not use the up-to-date parent image. So this should run."
+        if: steps.check.outputs.out-of-date == 'true'
+
+      - run: |
+          echo "My image does not use the up-to-date parent image. So this should NOT run."
+          exit 1
+        if: steps.check.outputs.out-of-date == 'false'
