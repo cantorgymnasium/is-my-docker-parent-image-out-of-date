@@ -23,11 +23,3 @@ jobs:
         with:
           parent-image: ${{ matrix.parent-image }}
           my-image: ${{ matrix.my-image }}
-
-      - run: ./tests/assert-out-of-date.sh "${{ matrix.my-image }}" "${{matrix.parent-image }}"
-        shell: bash
-        if: steps.check.outputs.out-of-date == 'true'
-
-      - run: ./tests/assert-up-to-date.sh "${{ matrix.my-image }}" "${{matrix.parent-image }}"
-        shell: bash
-        if: steps.check.outputs.out-of-date == 'false'
