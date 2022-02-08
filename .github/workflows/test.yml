@@ -3,7 +3,7 @@ name: Test
 on: [push, workflow_dispatch]
 
 jobs:
-  test-known-images:
+  test-public-images:
     name: Let's see if this works as intended
 
     runs-on: ${{ matrix.os }}
@@ -17,6 +17,42 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - id: check
+        uses: ./
+        with:
+          parent-image: ${{ matrix.parent-image }}
+          my-image: ${{ matrix.my-image }}
+
+      - run: ./tests/assert-out-of-date.sh "${{ matrix.my-image }}" "${{matrix.parent-image }}"
+        shell: bash
+        if: steps.check.outputs.out-of-date == 'true'
+
+      - run: ./tests/assert-up-to-date.sh "${{ matrix.my-image }}" "${{matrix.parent-image }}"
+        shell: bash
+        if: steps.check.outputs.out-of-date == 'false'
+
+  test-private-images:
+    name: Let's see if this works as intended
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+        parent-image:
+          ["alpine:3.13", "alpine:3.14", "ghcr.io/twiddler/my-alpine:3.13"]
+        my-image: ["ghcr.io/twiddler/my-alpine:3.13"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - id: check
         uses: ./
