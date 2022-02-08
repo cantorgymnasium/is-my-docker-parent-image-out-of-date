@@ -9,8 +9,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+        os: [ubuntu-latest]
+        parent-image: [nginx:1.21.0]
+        my-image: [nginx/nginx-ingress:1.12.0]
 
     steps:
       - uses: actions/checkout@v2
@@ -18,14 +21,13 @@ jobs:
       - id: check
         uses: ./
         with:
-          parent-image: nginx:1.21.0
-          my-image: nginx/nginx-ingress:1.12.0
+          parent-image: ${{ matrix.parent-image }}
+          my-image: ${{ matrix.my-image }}
 
-      - run: |
-          echo "My image uses the up-to-date parent image. So this should NOT run."
-          exit 1
+      - run: ./tests/assert-out-of-date.sh "${{ matrix.my-image }}" "${{matrix.parent-image }}"
+        shell: bash
         if: steps.check.outputs.out-of-date == 'true'
 
-      - run: |
-          echo "My image uses the up-to-date parent image. So this should run."
+      - run: ./tests/assert-up-to-date.sh "${{ matrix.my-image }}" "${{matrix.parent-image }}"
+        shell: bash
         if: steps.check.outputs.out-of-date == 'false'
