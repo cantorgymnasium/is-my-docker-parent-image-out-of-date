@@ -3,5 +3,4 @@
 echo "This script only runs if the check thinks my image is up-to-date. Let's see if our expectations agree."
 
 # This should be the exact inverse of the other script.
-chmod +x ./expect-out-of-date.sh
 ./expect-out-of-date.sh $1 $2 && exit 1
