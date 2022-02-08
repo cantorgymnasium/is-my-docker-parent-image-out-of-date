@@ -3,8 +3,8 @@ name: Test
 on: [push, workflow_dispatch]
 
 jobs:
-  test:
-    name: Let's see if this works
+  test-known-images:
+    name: Let's see if this works as intended
 
     runs-on: ${{ matrix.os }}
 
@@ -31,3 +31,32 @@ jobs:
       - run: ./tests/assert-up-to-date.sh "${{ matrix.my-image }}" "${{matrix.parent-image }}"
         shell: bash
         if: steps.check.outputs.out-of-date == 'false'
+
+  fail-on-unknown-images:
+    name: We should fail on unknown image names
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        parent-image: ["alpine, aljfkldjfg"]
+        my-image: ["alpine, alsdjlsfdg"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: check
+        uses: ./
+        with:
+          parent-image: ${{ matrix.parent-image }}
+          my-image: ${{ matrix.my-image }}
+        continue-on-error: true
+
+      - run: exit 0
+        shell: bash
+        if: steps.check.outputs.out-of-date == ''
+
+      - run: exit 1
+        shell: bash

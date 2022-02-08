@@ -1,5 +1,9 @@
 #!/bin/sh -l
 
+# Fail if skopeo throws an error, e.g. due to an unknown image name
+set -e
+set -o pipefail
+
 # Get layer digests of my image
 OWN=$(skopeo inspect docker://"$1" | jq .Layers)
 
