@@ -54,9 +54,6 @@ jobs:
           my-image: ${{ matrix.my-image }}
         continue-on-error: true
 
-      - run: exit 0
-        shell: bash
-        if: steps.check.outputs.out-of-date == ''
-
       - run: exit 1
         shell: bash
+        if: steps.check.outputs.out-of-date != ''
