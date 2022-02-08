@@ -22,7 +22,7 @@ runs:
   image: "Dockerfile"
   args:
     - ${{ inputs.my-image }}
-    - ${{ inputs.parent-image }})
+    - ${{ inputs.parent-image }}
 
 branding:
   icon: refresh-ccw
