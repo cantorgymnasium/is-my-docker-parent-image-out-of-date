@@ -12,8 +12,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
-        parent-image: ["nginx:1.21.0", "ubuntu"]
-        my-image: ["nginx/nginx-ingress:1.12.0"]
+        parent-image: ["nginx:1.21.0", ubuntu]
+        my-image: ["nginx/nginx-ingress:1.12.0", ubuntu]
 
     steps:
       - uses: actions/checkout@v2

@@ -9,5 +9,6 @@ PARENT=$2
 
 # There are fewer up-to-date combinations to check. Throw an error if we encounter one of those.
 [ "$OWN" = "nginx/nginx-ingress:1.12.0" ] && [ "$PARENT" = "nginx:1.21.0" ] && exit 1
+[ "$OWN" = "ubuntu" ] && [ "$PARENT" = "ubuntu" ] && exit 1
 
 echo "[$FILENAME] All tests passed."
