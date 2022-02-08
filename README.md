@@ -5,13 +5,13 @@
 [![GitHub license badge](https://badgen.net/github/license/twiddler/docker-image-update-checker)](https://github.com/twiddler/docker-image-update-checker/blob/main/LICENSE)
 [![GitHub Workflows badge](https://badgen.net/runkit/twiddler/twiddler-workflow)](https://github.com/search?q=docker-image-update-checker+path%3A.github%2Fworkflows%2F+language%3AYAML&type=Code)
 
-Action to check if the base image was updated and your image (published on DockerHub) needs to be rebuilt. This action will use Docker's API to compare the base layers of your image with the `parent-image`, without the need to pull the images.
+Action to check if the parent image was updated and your image (published on DockerHub) needs to be rebuilt. This action will use Docker's API to compare the parent layers of your image with the `parent-image`, without the need to pull the images.
 
 ## Inputs
 
 | Name           | Type   | Description                        |
 | -------------- | ------ | ---------------------------------- |
-| `parent-image` | String | Base Docker Image                  |
+| `parent-image` | String | Parent Docker Image                |
 | `my-image`     | String | Your image based on `parent-image` |
 
 Note: the `parent-image` needs to have the full path. For example for official images like `nginx`, the full path is `library/nginx`.
