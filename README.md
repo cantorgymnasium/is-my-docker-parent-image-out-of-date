@@ -4,7 +4,7 @@
 
 Well, ask no more! This github action has the answer! :sunglasses:
 
-Keeping your parent image up-to-date is essential to provide your built with the latest (security) patches. However, you might not want to stupidly rebuild your image everyday. Use this action to check if you really have to rebuild! :partying_face:
+Keeping your parent image up-to-date is essential to provide your built images with the latest (security) patches. However, you might not want to stupidly rebuild your image everyday. Use this action to check if you really have to rebuild! :partying_face:
 
 I haven't tested this with [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/), but I guess it should be able to (only) check the last stage that really makes it into your built image.
 
