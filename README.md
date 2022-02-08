@@ -1,9 +1,6 @@
 # Is my docker parent image out-of-date?
 
 [![Test](https://github.com/twiddler/is-my-docker-parent-image-out-of-date/actions/workflows/test.yml/badge.svg)](https://github.com/twiddler/is-my-docker-parent-image-out-of-date/actions/workflows/test.yml)
-[![GitHub release badge](https://badgen.net/github/release/twiddler/is-my-docker-parent-image-out-of-date/stable)](https://github.com/twiddler/is-my-docker-parent-image-out-of-date/releases/latest)
-[![GitHub license badge](https://badgen.net/github/license/twiddler/is-my-docker-parent-image-out-of-date)](https://github.com/twiddler/is-my-docker-parent-image-out-of-date/blob/main/LICENSE)
-[![GitHub Workflows badge](https://badgen.net/runkit/twiddler/twiddler-workflow)](https://github.com/search?q=is-my-docker-parent-image-out-of-date+path%3A.github%2Fworkflows%2F+language%3AYAML&type=Code)
 
 Well, ask no more! This github action has the answer! :sunglasses:
 
