@@ -14,8 +14,6 @@ Action to check if the parent image was updated and your image (published on Doc
 | `parent-image` | String | Parent Docker Image                |
 | `my-image`     | String | Your image based on `parent-image` |
 
-Note: the `parent-image` needs to have the full path. For example for official images like `nginx`, the full path is `library/nginx`.
-
 ## Output
 
 | Name             | Type   | Description                                               |
@@ -41,7 +39,7 @@ jobs:
         id: check
         uses: twiddler/docker-image-update-checker@v1
         with:
-          parent-image: library/nginx:1.21.0
+          parent-image: nginx:1.21.0
           image: user/app:latest
       - name: Build and push
         uses: docker/build-push-action@v2
