@@ -32,8 +32,8 @@ jobs:
         shell: bash
         if: steps.check.outputs.out-of-date == 'false'
 
-  fail-on-unknown-images:
-    name: We should fail on unknown image names
+  fail-on-unknown-parent-image:
+    name: We should fail if we cannot find `parent-image`
 
     runs-on: ${{ matrix.os }}
 
@@ -41,8 +41,34 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        parent-image: [alpine, aljfkldjfg]
-        my-image: [alpine, alsdjlsfdg]
+        parent-image: [qwertzui]
+        my-image: [alpine, asdfghjk]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: check
+        uses: ./
+        with:
+          parent-image: ${{ matrix.parent-image }}
+          my-image: ${{ matrix.my-image }}
+        continue-on-error: true
+
+      - run: exit 1
+        shell: bash
+        if: steps.check.outputs.out-of-date != ''
+
+  fail-on-unknown-my-image:
+    name: We should fail if we cannot find `my-image`
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        parent-image: [alpine, asdfghjk]
+        my-image: [qwertzui]
 
     steps:
       - uses: actions/checkout@v2
