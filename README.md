@@ -4,20 +4,22 @@
 
 Well, ask no more! This github action has the answer! :sunglasses:
 
-Keeping your parent image up-to-date is essential to provide your built with the latest (security) patches. However, you might not want to stupidly rebuild your image everyday. Use this action to check if you really have to rebuild! :partying-face:
+Keeping your parent image up-to-date is essential to provide your built images with the latest (security) patches. However, you might not want to stupidly rebuild your image everyday. Use this action to check if you really have to rebuild! :partying_face:
+
+I haven't tested this with [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/), but I guess it should be able to (only) check the last stage that really makes it into your built image.
 
 ## Inputs
 
-| Name           | Type   | Description                                 |
-| -------------- | ------ | ------------------------------------------- |
-| `parent-image` | String | Parent docker image                         |
-| `my-image`     | String | Your image which uses `FROM [parent-image]` |
+| Name           | Type   | Description                                     |
+| -------------- | ------ | ----------------------------------------------- |
+| `parent-image` | String | The docker parent image you are building on top |
+| `my-image`     | String | Your image which uses `FROM [parent-image]`     |
 
 ## Output
 
-| Name          | Type   | Description                                               |
-| ------------- | ------ | --------------------------------------------------------- |
-| `out-of-date` | String | 'true' or 'false' if the image needs to be updated or not |
+| Name          | Type   | Description                                                                                    |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| `out-of-date` | String | 'true' if `my-image` does **not** use the latest version of `parent-image`, 'false' otherwise. |
 
 ## Example
 

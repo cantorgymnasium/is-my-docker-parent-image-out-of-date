@@ -10,12 +10,12 @@ inputs:
     required: true
 
   my-image:
-    description: "Your image"
+    description: "Your image which uses `FROM [parent-image]`"
     required: true
 
 outputs:
   out-of-date:
-    description: "'true' if your image does NOT use an up-to-date parent image, 'false' otherwise."
+    description: "'true' if `my-image` does **not** use the latest version of `parent-image`, 'false'"
 
 runs:
   using: "docker"
