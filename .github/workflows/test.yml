@@ -41,8 +41,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        parent-image: ["alpine, aljfkldjfg"]
-        my-image: ["alpine, alsdjlsfdg"]
+        parent-image: [alpine, aljfkldjfg]
+        my-image: [alpine, alsdjlsfdg]
 
     steps:
       - uses: actions/checkout@v2
