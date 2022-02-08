@@ -4,7 +4,7 @@
 
 Well, ask no more! This github action has the answer! :sunglasses:
 
-Keeping your parent image up-to-date is essential to provide your built with the latest (security) patches. However, you might not want to stupidly rebuild your image everyday. Use this action to check if you really have to rebuild! :partying-face:
+Keeping your parent image up-to-date is essential to provide your built with the latest (security) patches. However, you might not want to stupidly rebuild your image everyday. Use this action to check if you really have to rebuild! :partying_face:
 
 ## Inputs
 
