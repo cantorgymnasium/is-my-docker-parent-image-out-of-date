@@ -21,10 +21,11 @@ jobs:
           parent-image: nginx:1.21.0
           my-image: nginx/nginx-ingress:1.12.0
 
-      - run: echo "My image does not use the up-to-date parent image. So this should run."
+      - run: |
+          echo "My image uses the up-to-date parent image. So this should NOT run."
+          exit 1
         if: steps.check.outputs.out-of-date == 'true'
 
       - run: |
-          echo "My image does not use the up-to-date parent image. So this should NOT run."
-          exit 1
+          echo "My image uses the up-to-date parent image. So this should run."
         if: steps.check.outputs.out-of-date == 'false'
