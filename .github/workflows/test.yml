@@ -12,8 +12,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        parent-image: [nginx:1.21.0]
-        my-image: [nginx/nginx-ingress:1.12.0]
+        parent-image: ["nginx:1.21.0"]
+        my-image: ["nginx/nginx-ingress:1.12.0"]
 
     steps:
       - uses: actions/checkout@v2
@@ -23,3 +23,11 @@ jobs:
         with:
           parent-image: ${{ matrix.parent-image }}
           my-image: ${{ matrix.my-image }}
+
+      - run: ./tests/assert-out-of-date.sh "${{ matrix.my-image }}" "${{matrix.parent-image }}"
+        shell: bash
+        if: steps.check.outputs.out-of-date == 'true'
+
+      - run: ./tests/assert-up-to-date.sh "${{ matrix.my-image }}" "${{matrix.parent-image }}"
+        shell: bash
+        if: steps.check.outputs.out-of-date == 'false'
