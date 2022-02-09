@@ -4,7 +4,7 @@ on: [push, workflow_dispatch]
 
 jobs:
   test-public-images:
-    name: Let's see if this works as intended
+    name: Works with public images
 
     runs-on: ${{ matrix.os }}
 
@@ -33,9 +33,13 @@ jobs:
         if: steps.check.outputs.out-of-date == 'false'
 
   test-private-images:
-    name: Let's see if this works as intended
+    name: Works with private images
 
     runs-on: ${{ matrix.os }}
+
+    # Pass docker/login-action authorization to our custom action. See https://github.com/docker/login-action/issues/32 and https://github.com/docker/login-action/issues/34.
+    env:
+      DOCKER_CONFIG: $HOME/.docker
 
     strategy:
       fail-fast: false
@@ -48,6 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # Refer to https://github.com/docker/login-action on how to use authenticate with your registry.
       - uses: docker/login-action@v1
         with:
           registry: ghcr.io

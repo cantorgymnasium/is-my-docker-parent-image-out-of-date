@@ -1,10 +1,11 @@
-FROM alpine
+# Use Docker-in-Docker image to access docker/login-action authorization
+FROM docker:20-dind
 
+# Install packages
 RUN apk add skopeo jq
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
+# Copy script from repository to the filesystem of the container
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
+# Script to execute when the docker container starts up
 ENTRYPOINT ["/entrypoint.sh"]
