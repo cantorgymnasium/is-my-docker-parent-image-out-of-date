@@ -1,6 +1,6 @@
 # Is my docker parent image out-of-date?
 
-[![Test](https://github.com/twiddler/is-my-docker-parent-image-out-of-date/actions/workflows/test.yml/badge.svg)](https://github.com/twiddler/is-my-docker-parent-image-out-of-date/actions/workflows/test.yml)
+[![Test](https://github.com/twiddler/is-my-docker-parent-image-out-of-date/actions/workflows/test.yml/badge.svg?branch=v1.0.0)](https://github.com/twiddler/is-my-docker-parent-image-out-of-date/actions/runs/1814466331)
 
 Well, ask no more! This github action has the answer! :sunglasses:
 
