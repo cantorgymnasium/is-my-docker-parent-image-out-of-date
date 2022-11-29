@@ -14,4 +14,4 @@ PARENT=$(skopeo inspect docker://"$2" | jq .Layers)
 OUTOFDATE=$(jq -cn "$OWN - ($OWN - $PARENT) | .==[]")
 
 # Return the result.
-echo "::set-output name=out-of-date::$OUTOFDATE"
+echo "out-of-date=$OUTOFDATE" >> $GITHUB_OUTPUT
