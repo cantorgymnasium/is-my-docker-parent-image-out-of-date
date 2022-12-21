@@ -16,7 +16,7 @@ jobs:
         my-image: ["nginx/nginx-ingress:1.12.0", ubuntu]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - id: check
         uses: ./
@@ -50,10 +50,10 @@ jobs:
         my-image: ["ghcr.io/twiddler/my-alpine:3.13"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # Refer to https://github.com/docker/login-action on how to use authenticate with your registry.
-      - uses: docker/login-action@v1
+      - uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -86,7 +86,7 @@ jobs:
         my-image: [alpine, asdfghjk]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - id: check
         uses: ./
@@ -112,7 +112,7 @@ jobs:
         my-image: [qwertzui]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - id: check
         uses: ./
