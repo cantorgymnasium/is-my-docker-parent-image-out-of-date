@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+        os: [ubuntu-latest, ubuntu-20.04]
         parent-image: ["nginx:1.21.0", ubuntu]
         my-image: ["nginx/nginx-ingress:1.12.0", ubuntu]
 
@@ -44,7 +44,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+        os: [ubuntu-latest, ubuntu-20.04]
         parent-image:
           ["alpine:3.13", "alpine:3.14", "ghcr.io/twiddler/my-alpine:3.13"]
         my-image: ["ghcr.io/twiddler/my-alpine:3.13"]
@@ -81,7 +81,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+        os: [ubuntu-latest, ubuntu-20.04]
         parent-image: [qwertzui]
         my-image: [alpine, asdfghjk]
 
@@ -107,7 +107,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+        os: [ubuntu-latest, ubuntu-20.04]
         parent-image: [alpine, asdfghjk]
         my-image: [qwertzui]
 
