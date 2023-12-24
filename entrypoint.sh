@@ -11,7 +11,7 @@ OWN=$(skopeo inspect docker://"$1" | jq .Layers)
 PARENT=$(skopeo inspect docker://"$2" | jq .Layers)
 
 # Check if all layers of parent are present in my image. If not, mine is out-of-date.
-OUTOFDATE=$(jq -cn "$OWN - ($OWN - $PARENT) | .==[]")
+OUTOFDATE=$(jq -cn "$OWN - ($OWN - $PARENT) | (. | length)<($PARENT | length)")
 
 # Return the result.
 echo "out-of-date=$OUTOFDATE" >> $GITHUB_OUTPUT
